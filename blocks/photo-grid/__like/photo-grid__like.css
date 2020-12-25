@@ -1,0 +1,23 @@
+.photo-grid__like {
+    position: absolute;
+    bottom: 29px;
+    right: 22px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../sprint-4-images/Like.svg');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 18px;
+    background-size: contain;
+}
+
+.photo-grid__like:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.photo-grid__like:active {
+    background-image: url('../../../sprint-4-images/Like-active.svg');
+    opacity: 1;
+}

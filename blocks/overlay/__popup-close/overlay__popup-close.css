@@ -1,0 +1,24 @@
+.overlay__popup-close {
+    position: absolute;
+    top: -44px;
+    right: 6px;
+    background-image: url('../../../sprint-4-images/Close-Icon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+    .overlay__popup-close {
+        top: -37px;
+        right: -38px;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+.overlay__popup-close:hover {
+    opacity: 0.6;
+}
