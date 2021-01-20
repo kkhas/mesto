@@ -1,4 +1,4 @@
-.overlay {
+.popup {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -7,12 +7,5 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
     justify-content: center;
-    padding: 123px 19px 79px;
-    align-items: flex-start;
-}
-
-@media screen and (min-width: 1024px) {
-    .overlay {
-        padding-top: 195px;
-    }
+    align-items: center;
 }

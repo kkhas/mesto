@@ -1,4 +1,4 @@
-.overlay__popup-close {
+.popup__close {
     position: absolute;
     top: -44px;
     right: 6px;
@@ -8,10 +8,12 @@
     width: 23px;
     height: 23px;
     cursor: pointer;
+    border-style: none;
+    background-color: unset;
 }
 
 @media screen and (min-width: 1024px) {
-    .overlay__popup-close {
+    .popup__close {
         top: -37px;
         right: -38px;
         width: 35px;
@@ -19,6 +21,6 @@
     }
 }
 
-.overlay__popup-close:hover {
+.popup__close:hover {
     opacity: 0.6;
 }

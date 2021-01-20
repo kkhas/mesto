@@ -10,6 +10,8 @@
     width: 20px;
     height: 18px;
     background-size: contain;
+    border-style: none;
+    background-color: unset;
 }
 
 .photo-grid__like:hover {

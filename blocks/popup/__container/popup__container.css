@@ -1,4 +1,4 @@
-.overlay__popup {
+.popup__container {
     padding: 25px 22px 0;
     max-width: 282px;
     width: 100%;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .overlay__popup {
+    .popup__container {
         padding: 34px 36px 21px;
         max-width: 430px;
         width: 100%;

@@ -1,9 +1,0 @@
-.overlay__popup-name {
-    padding: 0 0 4px;
-    border: none;
-    font-size: 14px;
-    line-height: 17px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}

@@ -1,33 +1,35 @@
 let formEdit = document.querySelector('.profile__edit-button')
-let overlay = document.querySelector('.overlay')
-let popupClose = overlay.querySelector('.overlay__popup-close')
+let popup = document.querySelector('.popup')
+let popupClose = popup.querySelector('.popup__close')
+let formElement = popup.querySelector('.popup__container')
+let nameInput = popup.querySelector('.popup__input_value_name')
+let jobInput = popup.querySelector('.popup__input_value_title')
+let profileTitle = document.querySelector('.profile__title')
+let profileSubtitle = document.querySelector('.profile__subtitle')
 
-let togglePopup = () => {
-    overlay.classList.toggle('overlay_active')
+let openPopup = () => {
+    popup.classList.add('popup_active')
+    nameInput.value = profileTitle.textContent
+    jobInput.value = profileSubtitle.textContent
 }
 
-formEdit.addEventListener('click', togglePopup)
-popupClose.addEventListener('click', togglePopup)
-overlay.addEventListener('click', (event) => {
+let closePopup = () => {
+    popup.classList.remove('popup_active')
+}
+
+formEdit.addEventListener('click', openPopup)
+popupClose.addEventListener('click', closePopup)
+popup.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
-        togglePopup()
+        closePopup()
     }
 })
 
-let formElement = overlay.querySelector('.overlay__popup')
-
-
 function handleFormSubmit (evt) {
-    evt.preventDefault(); 
-    
-    let nameInput = overlay.querySelector('.overlay__popup-name')
-    let jobInput = overlay.querySelector('.overlay__popup-title')
-    let profileTitle = document.querySelector('.profile__title')
-    let profileSubtitle = document.querySelector('.profile__subtitle')
-    
+    evt.preventDefault();  
     profileTitle.textContent = nameInput.value
     profileSubtitle.textContent = jobInput.value
-    togglePopup()
+    closePopup()
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
