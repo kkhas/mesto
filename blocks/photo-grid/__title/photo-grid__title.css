@@ -6,7 +6,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: 21px 62px 25px 22px;
+    margin: 25px 30px 25px 21px;
 }
 
 @media screen and (min-width: 1024px) {

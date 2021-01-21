@@ -16,7 +16,7 @@
             <section class="profile">
                 <img class="profile__avatar" src="./sprint-4-images/Avatar-image.jpg" alt="Аватар">
                 <div class="profile__details">
-                    <h1 class="profile__title" value>Жак-Ив Кусто</h1>
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
                     <button class="profile__edit-button" type="button"></button>
                 </div>
@@ -68,9 +68,9 @@
         </footer>
 
         <section class="popup">
-            <div class="popup__container" method="post">
+            <div class="popup__container">
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <form name="edit">
+                <form class="popup__form" name="edit" method="post">
                     <input class="popup__input popup__input_value_name" type="text" name="name-edit" id="name" value="Жак-Ив Кусто"/>
                     <input class="popup__input popup__input_value_title" type="text" name="title-edit" id="title" value="Исследователь океана"/>
                     <input class="popup__save-button" type="submit" value="Сохранить"/>

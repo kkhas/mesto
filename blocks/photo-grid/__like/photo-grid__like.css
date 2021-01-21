@@ -1,10 +1,4 @@
 .photo-grid__like {
-    position: absolute;
-    bottom: 29px;
-    right: 22px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     background-image: url('../../../sprint-4-images/Like.svg');
     background-repeat: no-repeat;
     width: 20px;
@@ -12,6 +6,7 @@
     background-size: contain;
     border-style: none;
     background-color: unset;
+    margin-top: 32px;
 }
 
 .photo-grid__like:hover {
