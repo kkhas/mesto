@@ -16,5 +16,6 @@
         font-size: 42px;
         line-height: 48px;
         transform: translate(0, 0);
+        margin: 0;
     }
 }
