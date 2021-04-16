@@ -5,7 +5,8 @@ https://kkhas.github.io/mesto/index.html
 ### Обзор
 
 * Figma
-* HTML & CSS & JavaScript
+* HTML & CSS 
+* JavaScript - Template & CloneNode, Form Validation
 
 **Figma**
 
@@ -15,4 +16,4 @@ https://kkhas.github.io/mesto/index.html
 
 Адаптивная верстка, минимальный размер экрана 320px, максимальный - 1280px. 
 Flex и Grid контейнеры, pop-up форма для редактирования.
-Изменение текстовых значений с помощью JavaScript.
+Изменение текстовых значений, редактирование профиля, добавление и удаление карточек, валидация форм на JavaScript.

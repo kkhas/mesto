@@ -56,22 +56,68 @@ const itemTemplate = document.querySelector(".item_template").content;
 const photoGrid = document.querySelector(".photo-grid");
 
 
+// подстановка значений в PopupEdit
+function inputPopupEditValue (popup) {
+  popupEditNameInput.value = profileTitle.textContent
+  popupEditJobInput.value = profileSubtitle.textContent
+}
 
+// очистка формы от ошибок
+function cleanForm (formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+
+  inputList.forEach((inputElement) => {
+    inputElement.classList.remove('popup__input_type_error');
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+        
+    errorElement.textContent = '';
+  })
+}
+
+//очистка формы от текста введенного ранее
+function prepareForm (popup) {
+  popupPlaceHeadingInput.value = '';
+  popupPlaceImageLinkInput.value = '';
+}
+
+// закрытие попапа кнопкой Esc
+function handleClosePopup(e) {
+  e.preventDefault();
+
+  if (e.key === "Escape") {
+    const activePopup = document.querySelector('.popup_active');
+    closePopup(activePopup);
+  }
+}
+
+function enableEscListener() {
+  document.addEventListener('keyup', handleClosePopup);
+}
 
 //открытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_active')
-  popupEditNameInput.value = profileTitle.textContent
-  popupEditJobInput.value = profileSubtitle.textContent
+  enableEscListener();
 }
 
 //закрытие попапов
 function closePopup(popup) {
   popup.classList.remove('popup_active')
+  document.removeEventListener('keyup', handleClosePopup);
 }
 
-popupEditButton.addEventListener('click', () => openPopup(popupEdit))
-popupPlaceOpen.addEventListener('click', () => openPopup(popupPlace))
+popupEditButton.addEventListener('click', function () { 
+  cleanForm(popupEditForm)
+  inputPopupEditValue (popupEdit)
+  openPopup(popupEdit)
+})
+
+popupPlaceOpen.addEventListener('click', function () { 
+  cleanForm(popupPlaceForm)
+  prepareForm (popupPlace)
+  openPopup(popupPlace)
+})
+
 
 popupEditClose.addEventListener('click', () => closePopup(popupEdit))
 popupPlaceClose.addEventListener('click', () => closePopup(popupPlace))
