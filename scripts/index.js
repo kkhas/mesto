@@ -1,3 +1,12 @@
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
+
 // //pop-ups
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupPlace = document.querySelector('.popup_type_new-place')
@@ -18,39 +27,12 @@ const popupPlaceClose = popupPlace.querySelector('.popup__close')
 const popupPlaceForm = popupPlace.querySelector('.popup__form')
 const popupPlaceHeadingInput = popupPlace.querySelector('.popup__input_value_heading')
 const popupPlaceImageLinkInput = popupPlace.querySelector('.popup__input_value_image')
+const createButton = popupPlace.querySelector('.popup__save-button')
 
 // //image pop-up
 const popupImageClose = popupImage.querySelector('.popup__close')
 const picturePopupImage = popupImage.querySelector('.popup__image')
 const textPopupImage = popupImage.querySelector('.popup__image-title')
-
-// //initial cards array
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
 
 const itemTemplate = document.querySelector(".item_template").content;
 const photoGrid = document.querySelector(".photo-grid");
@@ -64,40 +46,28 @@ function inputPopupEditValue (popup) {
 
 // очистка формы от ошибок
 function cleanForm (formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector))
 
   inputList.forEach((inputElement) => {
-    inputElement.classList.remove('popup__input_type_error');
+    inputElement.classList.remove(validationConfig.inputErrorClass);
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
         
     errorElement.textContent = '';
   })
 }
 
-//очистка формы от текста введенного ранее
-function prepareForm (popup) {
-  popupPlaceHeadingInput.value = '';
-  popupPlaceImageLinkInput.value = '';
-}
-
 // закрытие попапа кнопкой Esc
 function handleClosePopup(e) {
-  e.preventDefault();
-
   if (e.key === "Escape") {
     const activePopup = document.querySelector('.popup_active');
     closePopup(activePopup);
   }
 }
 
-function enableEscListener() {
-  document.addEventListener('keyup', handleClosePopup);
-}
-
 //открытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_active')
-  enableEscListener();
+  document.addEventListener('keyup', handleClosePopup);
 }
 
 //закрытие попапов
@@ -113,8 +83,13 @@ popupEditButton.addEventListener('click', function () {
 })
 
 popupPlaceOpen.addEventListener('click', function () { 
+  popupPlaceForm.reset()
+  const button = popupPlace.querySelector(validationConfig.submitButtonSelector)
+  button.disabled = true;
+  button.classList.add(validationConfig.inactiveButtonClass)
+
+  
   cleanForm(popupPlaceForm)
-  prepareForm (popupPlace)
   openPopup(popupPlace)
 })
 
