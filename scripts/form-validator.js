@@ -70,6 +70,7 @@ function hasInvalidInput (inputList) {
 
 enableValidation(validationConfig ) 
 
+// new branch
 
 // const validationConfig = {
 //   form: '.popup__form[name="edit"]',
