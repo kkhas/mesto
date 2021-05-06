@@ -1,6 +1,6 @@
 import { Card } from './card.js'; 
-import { popupPlace, popupPlaceForm, popupPlaceHeadingInput, popupPlaceImageLinkInput, closePopup } from './popup.js';
-
+import { popupEditForm, popupPlace, popupPlaceForm, popupPlaceHeadingInput, popupPlaceImageLinkInput, closePopup } from './popup.js';
+import { FormValidator, validationConfig } from './validate.js';
 
 
 
@@ -8,20 +8,6 @@ import { popupPlace, popupPlaceForm, popupPlaceHeadingInput, popupPlaceImageLink
 const itemTemplate = document.querySelector(".item_template").content;
 const photoGrid = document.querySelector(".photo-grid");
 
-
-
-
-// очистка формы от ошибок
-function cleanForm (formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector))
-
-  inputList.forEach((inputElement) => {
-    inputElement.classList.remove(validationConfig.inputErrorClass);
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-        
-    errorElement.textContent = '';
-  })
-}
 
 //функция создания карточки
 function createCard(item) {
@@ -43,3 +29,9 @@ function submitCardsForm (evt) {
 }
 
 popupPlaceForm.addEventListener('submit', submitCardsForm)
+
+const popupEditFormValidation = new FormValidator(validationConfig, popupEditForm) 
+popupEditFormValidation.enableValidation()
+
+const popupPlaceFormValidation = new FormValidator(validationConfig, popupPlaceForm) 
+popupPlaceFormValidation.enableValidation()

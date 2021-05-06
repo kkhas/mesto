@@ -1,11 +1,11 @@
 import { validationConfig } from './validate.js';
 
-// //pop-ups
+//pop-ups
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupPlace = document.querySelector('.popup_type_new-place')
 const popupImage = document.querySelector('.popup_type_image')
 
-// //profile edit
+//profile edit
 const popupEditButton = document.querySelector('.profile__edit-button')
 const popupEditForm = popupEdit.querySelector('.popup__form')
 const popupEditClose = popupEdit.querySelector('.popup__close')
@@ -14,7 +14,7 @@ const popupEditJobInput = popupEdit.querySelector('.popup__input_value_title')
 const profileTitle = document.querySelector('.profile__title')
 const profileSubtitle = document.querySelector('.profile__subtitle')
 
-// //new place
+//new place
 const popupPlaceOpen = document.querySelector('.profile__add')
 const popupPlaceClose = popupPlace.querySelector('.popup__close')
 const popupPlaceForm = popupPlace.querySelector('.popup__form')
@@ -22,7 +22,7 @@ const popupPlaceHeadingInput = popupPlace.querySelector('.popup__input_value_hea
 const popupPlaceImageLinkInput = popupPlace.querySelector('.popup__input_value_image')
 const createButton = popupPlace.querySelector('.popup__save-button')
 
-// //image pop-up
+//image pop-up
 const popupImageClose = popupImage.querySelector('.popup__close')
 const picturePopupImage = popupImage.querySelector('.popup__image')
 const textPopupImage = popupImage.querySelector('.popup__image-title')
@@ -54,19 +54,20 @@ function closePopup(popup) {
 }
 
 popupEditButton.addEventListener('click', function () { 
-  //cleanForm(popupEditForm)
   inputPopupEditValue (popupEdit)
+  
+  const inputList = Array.from(popupEditForm.querySelectorAll(validationConfig.inputSelector))
+     inputList.forEach((inputElement) => {
+     inputElement.classList.remove(validationConfig.inputErrorClass)
+     const errorElement = popupEditForm.querySelector(`#${inputElement.id}-error`);
+     errorElement.textContent = '';
+    })
+  
   openPopup(popupEdit)
 })
 
 popupPlaceOpen.addEventListener('click', function () { 
   popupPlaceForm.reset()
-  const button = popupPlace.querySelector(validationConfig.submitButtonSelector)
-  //button.disabled = true;
-  //button.classList.add(validationConfig.inactiveButtonClass)
-
-  
-  //cleanForm(popupPlaceForm)
   openPopup(popupPlace)
 })
 
@@ -103,4 +104,4 @@ function handleProfileEditFormSubmit (evt) {
 popupEditForm.addEventListener('submit', handleProfileEditFormSubmit);
 
 
-export { popupPlace, popupPlaceForm, openPopup, popupImage, closePopup, popupPlaceHeadingInput, popupPlaceImageLinkInput }
+export { popupPlace, popupPlaceForm, openPopup, popupImage, closePopup, popupPlaceHeadingInput, popupPlaceImageLinkInput, popupEditForm }
