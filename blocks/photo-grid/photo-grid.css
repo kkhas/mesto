@@ -1,6 +1,6 @@
 .photo-grid {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 282px;
     grid-template-rows: auto;
     margin: 0px 19px 0;
     grid-gap: 20px;
@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 768px) {
     .photo-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 282px 282px;
         row-gap: 20px;
         max-width: 880px;
         margin: 0 auto;

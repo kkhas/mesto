@@ -9,10 +9,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding: 31px 0 9px;
+    padding: 10px 0 9px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
     .popup__input {       
         max-width: 358px;
         padding-top: 31px;
