@@ -10,6 +10,7 @@
     white-space: nowrap;
     overflow: hidden;
     padding: 10px 0 9px;
+    outline: none;
 }
 
 @media screen and (min-width: 768px) {
