@@ -6,13 +6,12 @@
     justify-content: center;
     position: relative;
     padding-inline-start: 0px;
+    grid-gap: 20px;
 }
 
 @media screen and (min-width: 768px) {
     .photo-grid {
         grid-template-columns: 282px 282px;
-        row-gap: 20px;
-        grid-gap: 20px;
         max-width: 880px;
         margin: 0 auto;
         padding: 0 30px;
