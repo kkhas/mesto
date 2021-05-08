@@ -1,11 +1,14 @@
 import { Card } from './card.js'; 
 import { popupEditForm, popupPlace, popupPlaceForm, popupPlaceHeadingInput, popupPlaceImageLinkInput, closePopup } from './popup.js';
-import { FormValidator, validationConfig } from './validate.js';
+import { FormValidator, validationConfig } from './FormValidator.js';
+
+export const popupEditFormValidation = new FormValidator(validationConfig, popupEditForm) 
+popupEditFormValidation.enableValidation()
+
+export const popupPlaceFormValidation = new FormValidator(validationConfig, popupPlaceForm) 
+popupPlaceFormValidation.enableValidation()
 
 
-
-
-const itemTemplate = document.querySelector(".item_template").content;
 const photoGrid = document.querySelector(".photo-grid");
 
 
@@ -25,13 +28,8 @@ function submitCardsForm (evt) {
   evt.preventDefault()
   
   photoGrid.prepend(createCard({ name: popupPlaceHeadingInput.value, link: popupPlaceImageLinkInput.value }))
+  popupPlaceFormValidation.resetForm()
   closePopup(popupPlace)
 }
 
 popupPlaceForm.addEventListener('submit', submitCardsForm)
-
-const popupEditFormValidation = new FormValidator(validationConfig, popupEditForm) 
-popupEditFormValidation.enableValidation()
-
-const popupPlaceFormValidation = new FormValidator(validationConfig, popupPlaceForm) 
-popupPlaceFormValidation.enableValidation()

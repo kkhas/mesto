@@ -1,4 +1,4 @@
-import { validationConfig } from './validate.js';
+import { popupPlaceFormValidation, popupEditFormValidation } from './index.js'
 
 //pop-ups
 const popupEdit = document.querySelector('.popup_type_edit')
@@ -20,12 +20,10 @@ const popupPlaceClose = popupPlace.querySelector('.popup__close')
 const popupPlaceForm = popupPlace.querySelector('.popup__form')
 const popupPlaceHeadingInput = popupPlace.querySelector('.popup__input_value_heading')
 const popupPlaceImageLinkInput = popupPlace.querySelector('.popup__input_value_image')
-const createButton = popupPlace.querySelector('.popup__save-button')
 
 //image pop-up
 const popupImageClose = popupImage.querySelector('.popup__close')
-const picturePopupImage = popupImage.querySelector('.popup__image')
-const textPopupImage = popupImage.querySelector('.popup__image-title')
+
 
 // подстановка значений в PopupEdit
 function inputPopupEditValue (popup) {
@@ -55,25 +53,19 @@ function closePopup(popup) {
 
 popupEditButton.addEventListener('click', function () { 
   inputPopupEditValue (popupEdit)
-  
-  const inputList = Array.from(popupEditForm.querySelectorAll(validationConfig.inputSelector))
-     inputList.forEach((inputElement) => {
-     inputElement.classList.remove(validationConfig.inputErrorClass)
-     const errorElement = popupEditForm.querySelector(`#${inputElement.id}-error`);
-     errorElement.textContent = '';
-    })
-  
+  popupEditFormValidation.resetForm()
   openPopup(popupEdit)
 })
 
-popupPlaceOpen.addEventListener('click', function () { 
-  popupPlaceForm.reset()
+popupPlaceOpen.addEventListener('click', function () {
+  popupPlaceFormValidation.resetForm()
   openPopup(popupPlace)
 })
 
 
 popupEditClose.addEventListener('click', () => closePopup(popupEdit))
 popupPlaceClose.addEventListener('click', () => closePopup(popupPlace))
+popupImageClose.addEventListener('click', () => closePopup(popupImage))
 
 popupEdit.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
@@ -98,6 +90,7 @@ function handleProfileEditFormSubmit (evt) {
   evt.preventDefault()
   profileTitle.textContent = popupEditNameInput.value
   profileSubtitle.textContent = popupEditJobInput.value
+  popupEditFormValidation.resetForm()
   closePopup(popupEdit)
 }
 
