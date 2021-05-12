@@ -1,12 +1,13 @@
-import { popupImage, openPopup } from './popup.js'
-
 export class Card {
 
-  constructor(cardData) {
+  constructor(cardData, handleCardClick) {
     this._cardData = cardData;
+    this._cardData.name = cardData.name;
+    this._cardData.link = cardData.link;
     this._cardElement = this._createCardElement();
     this._likeElement = this._cardElement.querySelector('.photo-grid__like');
     this._addEventListeners();
+    this._handleCardClick = handleCardClick;
   }
 
   _createCardElement() {
@@ -27,7 +28,7 @@ export class Card {
     const deleteButton = this._cardElement.querySelector('.photo-grid__delete');
     deleteButton.addEventListener('click', () => this._remove());
 
-    this._cardElement.querySelector('.photo-grid__image').addEventListener('click', () => this._preview())
+    this._cardElement.querySelector('.photo-grid__image').addEventListener('click', () => this._handleCardClick(this._cardData.link, this._cardData.name))
   }
 
   _like() {
@@ -38,16 +39,16 @@ export class Card {
     this._cardElement.remove();
   }
 
-  _preview() {
-    const picturePopupImage = popupImage.querySelector('.popup__image')
-    const textPopupImage = popupImage.querySelector('.popup__image-title')
+  // _preview() {
+  //   const picturePopupImage = popupImage.querySelector('.popup__image')
+  //   const textPopupImage = popupImage.querySelector('.popup__image-title')
 
-    picturePopupImage.src = this._cardData.link;
-    picturePopupImage.alt = this._cardData.name;
-    textPopupImage.textContent = this._cardData.name;
+  //   picturePopupImage.src = this._cardData.link;
+  //   picturePopupImage.alt = this._cardData.name;
+  //   textPopupImage.textContent = this._cardData.name;
 
-    openPopup(popupImage)
-  }
+  //   openPopup(popupImage)
+  // }
 
   render() {
     return this._cardElement;

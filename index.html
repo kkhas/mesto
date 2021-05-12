@@ -34,7 +34,7 @@
         <section class="popup popup_type_edit">
             <div class="popup__container">
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <form class="popup__form" name="edit" method="post" novalidate>
+                <form class="popup__form popup__form_edit" name="edit" method="post" novalidate>
                     <input class="popup__input popup__input_value_name" type="text" name="name-edit" id="name" value="Жак-Ив Кусто" minlength="2" maxlength="40" required/>
                     <span class="popup__error" id="name-error"></span>
                     <input class="popup__input popup__input_value_title" type="text" name="title-edit" id="title" value="Исследователь океана" minlength="2" maxlength="200" required/>
@@ -78,8 +78,7 @@
             <button class="photo-grid__delete" type="button"></button>
         </li>
     </template>
-    <script src="./scripts/initial-cards.js"></script>
-    <script src="./scripts/index.js" type="module" defer></script>
+    <script src="./scripts/pages/index.js" type="module" defer></script>
     
 </body>
 </html>
