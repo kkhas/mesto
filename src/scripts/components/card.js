@@ -39,17 +39,6 @@ export class Card {
     this._cardElement.remove();
   }
 
-  // _preview() {
-  //   const picturePopupImage = popupImage.querySelector('.popup__image')
-  //   const textPopupImage = popupImage.querySelector('.popup__image-title')
-
-  //   picturePopupImage.src = this._cardData.link;
-  //   picturePopupImage.alt = this._cardData.name;
-  //   textPopupImage.textContent = this._cardData.name;
-
-  //   openPopup(popupImage)
-  // }
-
   render() {
     return this._cardElement;
   }

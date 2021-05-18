@@ -1,6 +1,4 @@
-//import { popupPlaceFormValidation, popupEditFormValidation } from '../pages/index.js'
-
-class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this.setEventListeners();
@@ -36,26 +34,3 @@ class Popup {
     document.removeEventListener('keyup', this._handleEscClose);
   }
 }
-
-export default Popup
-
-
-
-
-
-// // подстановка значений в PopupEdit class UserInfo
-// function inputPopupEditValue (popup) {
-//   popupEditNameInput.value = profileTitle.textContent
-//   popupEditJobInput.value = profileSubtitle.textContent
-// }
-
-
-
-
-// popupEditButton.addEventListener('click', function () { 
-//   inputPopupEditValue (popupEdit)
-//   popupEditFormValidation.resetForm()
-//   openPopup(popupEdit)
-// })
-
-// popupEditForm.addEventListener('submit', handleProfileEditFormSubmit);
