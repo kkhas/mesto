@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
     <div class="page__container">
         <header class="header">
-            <a class="header__link" target="_blank" href="#"><img class="header__logo" src="./images/header_logo.svg" alt="Логотип"></a>
+            <a class="header__link" target="_blank" href="#"><img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="Логотип"></a>
         </header>
         
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="./images/Avatar-image.jpg" alt="Аватар">
+                <img class="profile__avatar" src="<%=require('./images/Avatar-image.jpg')%>" alt="Аватар">
                 <div class="profile__details">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
@@ -61,7 +60,7 @@
 
         <section class="popup popup_type_image">
             <figure class="popup__image-container">
-                <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Image">
+                <img class="popup__image" src="#" alt="Image">
                 <figcaption class="popup__image-title">Mesto</figcaption>
                 <button class="popup__close" type="button"></button>
             </figure>
