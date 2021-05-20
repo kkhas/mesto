@@ -4,12 +4,13 @@ export default class PopupWithForm extends Popup {
     constructor(popupSelector, formSubmitHandler) {
       super(popupSelector);
       this._formSubmitHandler = formSubmitHandler;
+      this._inputs = Array.from(this._form.querySelectorAll('.popup__input'))
     }
  
     _getInputValues() {
       const values = {}
-      const inputs = Array.from(this._form.querySelectorAll('.popup__input'))
-      inputs.forEach(input => {
+      
+      this._inputs.forEach(input => {
         values[input.name] = input.value;
       })
       
@@ -28,13 +29,6 @@ export default class PopupWithForm extends Popup {
 
         this.closePopup();
       });
-    }
-
-    pasteUserData(data) {
-      const popupEditNameInput = document.querySelector('.popup__input_value_name')
-      const popupEditJobInput = document.querySelector('.popup__input_value_title')
-      popupEditNameInput.value = data.name 
-      popupEditJobInput.value = data.job
     }
 
     closePopup() {

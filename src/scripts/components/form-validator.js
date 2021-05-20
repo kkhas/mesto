@@ -1,5 +1,3 @@
-import validationConfig from '../utils/validation-config.js'
- 
 class FormValidator { 
   constructor(validationConfig, formElement) { 
     this._validationConfig = validationConfig; 
@@ -11,15 +9,15 @@ class FormValidator {
   _showInputError(inputElement, errorMessage) { 
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`); 
      
-    inputElement.classList.add(validationConfig.inputErrorClass); 
+    inputElement.classList.add(this._validationConfig.inputErrorClass); 
     errorElement.textContent = errorMessage; 
-    errorElement.classList.add(validationConfig.errorClass); 
+    errorElement.classList.add(this._validationConfig.errorClass); 
   } 
  
   _hideInputError(inputElement) { 
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`); 
-    inputElement.classList.remove(validationConfig.inputErrorClass); 
-    errorElement.classList.remove(validationConfig.errorClass); 
+    inputElement.classList.remove(this._validationConfig.inputErrorClass); 
+    errorElement.classList.remove(this._validationConfig.errorClass); 
     errorElement.textContent = ''; 
   } 
  
@@ -77,4 +75,4 @@ class FormValidator {
   }   
 } 
  
-export { validationConfig, FormValidator }
+export { FormValidator }

@@ -1,55 +1,52 @@
-import '../../pages/index.css'
-import { Card } from '../components/card.js'; 
-import { Section } from '../components/section.js';
-import { initialCards} from '../utils/initial-cards.js';
+import './index.css'
+import { Card } from '../scripts/components/card.js'; 
+import { Section } from '../scripts/components/section.js';
+import { initialCards} from '../scripts/utils/initial-cards.js';
 import { photoGrid, 
   profileEditButton, 
-  newCardAddButton } from '../utils/constants.js';
-import PopupWithForm from '../components/popup-with-form.js';
-import PopupWithImage from '../components/popup-with-image.js';
-import { FormValidator, validationConfig } from '../components/form-validator.js';
-import UserInfo from '../components/user-info.js';
+  newCardAddButton } from '../scripts/utils/constants.js';
+import PopupWithForm from '../scripts/components/popup-with-form.js';
+import PopupWithImage from '../scripts/components/popup-with-image.js';
+import { FormValidator } from '../scripts/components/form-validator.js';
+import UserInfo from '../scripts/components/user-info.js';
+import validationConfig from '../scripts/utils/validation-config.js'
 
 const popupImage = new PopupWithImage('.popup_type_image')
-popupImage.setEventListeners();
 
 function cardImageClickHandler(link, name) {
   popupImage.openPopup(link, name)
 };
 
+function renderer(item) {
+  const cardElement = new Card(item, cardImageClickHandler)
+  return cardElement.render()
+}
+
 //добавление карточек из массива
-const initialCardsList = new Section ({ 
+const newCard = new Section ({ 
   items: initialCards,
-  renderer: (item) => {
-    const cardElement = new Card(item, cardImageClickHandler)
-   
-    return cardElement.render()
-  }}, 
+  renderer},
   photoGrid
 );
 
-initialCardsList.renderItems();
+newCard.renderItems();
 
 //функция добавления карточки через форму
 function submitCardsForm (data) {
-  const newCard = new Section (
-    {}, 
-    photoGrid
-  );
-  const card = new Card (data, cardImageClickHandler)
-  newCard.addItem(card.render())
+  newCard.addItem(renderer(data))
 }
 
 const newPlaceForm = new PopupWithForm('.popup_type_new-place', submitCardsForm)
 
+const userInfo = new UserInfo()
+
 //функция редактирования информации в профиле
 function handleProfileEditFormSubmit (data) {
-  const userInfo = new UserInfo(data)
   userInfo.setUserInfo(data)
 }
 
 const profileEditForm = new PopupWithForm('.popup_type_edit', handleProfileEditFormSubmit)
-const userInfo = new UserInfo({})
+
 
 const popupPlaceFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_new-place'))
 popupPlaceFormValidation.enableValidation()
@@ -57,10 +54,16 @@ popupPlaceFormValidation.enableValidation()
 const popupEditFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_edit')) 
 popupEditFormValidation.enableValidation()
 
+function pasteUserData(data) {
+  const popupEditNameInput = document.querySelector('.popup__input_value_name')
+  const popupEditJobInput = document.querySelector('.popup__input_value_title')
+  popupEditNameInput.value = data.name 
+  popupEditJobInput.value = data.job
+}
 
 profileEditButton.addEventListener('click', () => {
   popupEditFormValidation.resetForm()
-  profileEditForm.pasteUserData(userInfo.getUserInfo())
+  pasteUserData(userInfo.getUserInfo())
   profileEditForm.openPopup()
 });
 
