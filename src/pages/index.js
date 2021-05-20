@@ -4,7 +4,9 @@ import { Section } from '../scripts/components/section.js';
 import { initialCards} from '../scripts/utils/initial-cards.js';
 import { photoGrid, 
   profileEditButton, 
-  newCardAddButton } from '../scripts/utils/constants.js';
+  newCardAddButton,
+  popupEditNameInput, 
+  popupEditJobInput } from '../scripts/utils/constants.js';
 import PopupWithForm from '../scripts/components/popup-with-form.js';
 import PopupWithImage from '../scripts/components/popup-with-image.js';
 import { FormValidator } from '../scripts/components/form-validator.js';
@@ -38,7 +40,7 @@ function submitCardsForm (data) {
 
 const newPlaceForm = new PopupWithForm('.popup_type_new-place', submitCardsForm)
 
-const userInfo = new UserInfo()
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle')
 
 //функция редактирования информации в профиле
 function handleProfileEditFormSubmit (data) {
@@ -55,8 +57,6 @@ const popupEditFormValidation = new FormValidator(validationConfig, document.que
 popupEditFormValidation.enableValidation()
 
 function pasteUserData(data) {
-  const popupEditNameInput = document.querySelector('.popup__input_value_name')
-  const popupEditJobInput = document.querySelector('.popup__input_value_title')
   popupEditNameInput.value = data.name 
   popupEditJobInput.value = data.job
 }
