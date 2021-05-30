@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Место</title>
+    <title>Место</title> 
 </head>
 <body class="page">
     <div class="page__container">
@@ -13,10 +13,13 @@
         
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/Avatar-image.jpg')%>" alt="Аватар">
+                <button class="profile__avatar-container" type="button">
+                    <img class="profile__avatar" src="#" alt="Аватар">
+                    <div class="profile__avatar-edit"></div>
+                </button>
                 <div class="profile__details">
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <p class="profile__subtitle">Исследователь океана</p>
+                    <h1 class="profile__title"></h1>
+                    <p class="profile__subtitle"></p>
                     <button class="profile__edit-button" type="button"></button>
                 </div>
                 <button class="profile__add" type="button"></button>
@@ -36,7 +39,7 @@
                 <form class="popup__form popup__form_edit" name="edit" method="post" novalidate>
                     <input class="popup__input popup__input_value_name" type="text" name="name" id="name" value="" minlength="2" maxlength="40" required/>
                     <span class="popup__error" id="name-error"></span>
-                    <input class="popup__input popup__input_value_title" type="text" name="job" id="title" value="" minlength="2" maxlength="200" required/>
+                    <input class="popup__input popup__input_value_title" type="text" name="about" id="title" value="" minlength="2" maxlength="200" required/>
                     <span class="popup__error" id="title-error"></span>
                     <input class="popup__button popup__save-button" type="submit" value="Сохранить"/>
                 </form>
@@ -64,8 +67,28 @@
                 <figcaption class="popup__image-title">Mesto</figcaption>
                 <button class="popup__close" type="button"></button>
             </figure>
-                
-            
+        </section>
+
+        <section class="popup popup_type_confirm">
+            <div class="popup__container popup__container_type_confirm">
+                <h2 class="popup__heading">Вы уверены?</h2>
+                <form class="popup__form popup__form_confirm" name="confirm-deleting" method="delete">
+                    <input class="popup__button popup__save-button" type="submit" value="Да"/>
+                </form>
+                <button class="popup__close" type="button"></button>
+            </div>   
+        </section>
+
+        <section class="popup popup_type_edit-avatar">
+            <div class="popup__container popup__container_type_edit-avatar">
+                <h2 class="popup__heading">Обновить аватар</h2>
+                <form class="popup__form popup__form_edit-avatar" name="add-new-avatar" method="post" novalidate>
+                    <input class="popup__input popup__input_value_avatar" type="url" name="avatar" id="avatar" placeholder="Ссылка на изображение" required/>
+                    <span class="popup__error" id="avatar-error"></span>
+                    <input class="popup__button popup__save-button" type="submit" value="Сохранить"/>
+                </form>
+                <button class="popup__close" type="button"></button>
+            </div>   
         </section>
     </div>
 
@@ -73,11 +96,14 @@
         <li class="photo-grid__item">
             <img class="photo-grid__image" src="#" alt="">
             <h2 class="photo-grid__title"></h2>
-            <button class="photo-grid__like" type="button"></button>
-            <button class="photo-grid__delete" type="button"></button>
+            <div>
+                <button class="photo-grid__like" type="button"></button>
+                <p class="photo-grid__like-count" value="0"></p>
+            </div>
+            <button class="photo-grid__delete photo-grid__delete_hidden" type="button"></button>
         </li>
     </template>
-    <script src="./scripts/pages/index.js" type="module" defer></script>
+    <script src="./pages/index.js" type="module" defer></script>
     
 </body>
 </html>

@@ -5,6 +5,8 @@
     height: 282px;
     max-width: 282px;
     margin: 0 auto;
+    object-fit: cover;
+    object-position: top;
 }
 
 .photo-grid__image:hover {
