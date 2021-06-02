@@ -8,9 +8,21 @@ import { photoGrid,
   popupEditJobInput, 
   avatarElement,
   avatarEditElement,
-  popupConfirm,
   popupEdit,
-  popupAvatarElement } from '../scripts/utils/constants.js';
+  popupAvatarElement,
+  profileName, 
+  profileAbout,
+  popupConfirm,
+  popupNewPlace,
+  popupImageSelector,
+  popupProfileEditForm,
+  avatarEditForm,
+  popupNewPlaceForm,
+  profileBtnValue,
+  profileBtnNewValue,
+  newPlaceBtnValue,
+  newPlaceBtnNewValue,
+  itemTemplate } from '../scripts/utils/constants.js';
 import PopupWithForm from '../scripts/components/popup-with-form.js';
 import PopupWithImage from '../scripts/components/popup-with-image.js';
 import { FormValidator } from '../scripts/components/form-validator.js';
@@ -18,6 +30,7 @@ import UserInfo from '../scripts/components/user-info.js';
 import validationConfig from '../scripts/utils/validation-config.js';
 import Api from '../scripts/components/api.js';
 import PopupWithConfirmation from '../scripts/components/popup-with-confirmation.js';
+import { renderLoading } from '../scripts/utils/utils.js';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-24',
@@ -27,21 +40,21 @@ const api = new Api({
   }
 });
 
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle')
+const userInfo = new UserInfo(profileName, profileAbout, avatarElement)
 const newCard = new Section (renderer, photoGrid);
-const confirmPopup = new PopupWithConfirmation ('.popup_type_confirm', handleConfirmDeleting)
-const profileEditForm = new PopupWithForm('.popup_type_edit', handleProfileEditFormSubmit)
-const newPlaceForm = new PopupWithForm('.popup_type_new-place', submitCardsForm)
-const editAvatarForm = new PopupWithForm('.popup_type_edit-avatar', handleEditAvatarFormSubmit)
-const popupImage = new PopupWithImage('.popup_type_image')
+const confirmPopup = new PopupWithConfirmation (popupConfirm, handleConfirmDeleting)
+const profileEditForm = new PopupWithForm(popupEdit, handleProfileEditFormSubmit)
+const newPlaceForm = new PopupWithForm(popupNewPlace, submitCardsForm)
+const editAvatarForm = new PopupWithForm(popupAvatarElement, handleEditAvatarFormSubmit)
+const popupImage = new PopupWithImage(popupImageSelector)
 
-const popupPlaceFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_new-place'))
+const popupPlaceFormValidation = new FormValidator(validationConfig, popupNewPlaceForm)
 popupPlaceFormValidation.enableValidation()
 
-const popupEditFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_edit')) 
+const popupEditFormValidation = new FormValidator(validationConfig, popupProfileEditForm) 
 popupEditFormValidation.enableValidation()
 
-const popupAvatarFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_edit-avatar'))
+const popupAvatarFormValidation = new FormValidator(validationConfig, avatarEditForm,)
 popupAvatarFormValidation.enableValidation()
 
 let user = null;
@@ -71,8 +84,10 @@ function renderInitialCards(result) {
   newCard.renderItems(result);
 }
 
-function renderer(item) {
-  const cardElement = new Card(item, 
+function renderer(cardData) {
+  const cardElement = new Card(
+    itemTemplate,
+    cardData, 
     user,
     cardImageClickHandler, 
     handleDeleteClick,
@@ -89,7 +104,6 @@ function handleLikeAdd(evt, cardData) {
     evt.target.classList.add('photo-grid__like-active')
   })
   .catch((err) => {console.log(err)})
-  .finally()
 }
 
 function handleLikeDelete(evt, cardData) {
@@ -99,15 +113,14 @@ function handleLikeDelete(evt, cardData) {
     evt.target.classList.remove('photo-grid__like-active')
   })
   .catch((err) => {console.log(err)})
-  .finally()
 }
 
 function cardImageClickHandler(link, name) {
-  popupImage.openPopup(link, name)
+  popupImage.open(link, name)
 };
 
 function handleDeleteClick(evt, cardData) {
-  confirmPopup.openPopup()
+  confirmPopup.open()
   confirmPopup.setEventListeners(evt, cardData)
 }
 
@@ -115,41 +128,40 @@ function handleConfirmDeleting(evt, cardData) {
   evt.target.parentNode.remove();
   api.deleteCard(cardData)
   .catch((err) => {console.log(err)})
-  .finally()
 }
 
 //функция добавления карточки через форму
 function submitCardsForm (data) {
+  renderLoading(true, popupNewPlace, newPlaceBtnValue, newPlaceBtnNewValue)
   api.postCard(data).then((data) => {
     
     _id = data._id
     data.owner = owner
     data.likes = []
     newCard.addItem(renderer(data))
-    newPlaceForm.closePopup()
+    newPlaceForm.close()
   })
   .catch((err) => {console.log(err)})
-  .finally()
+  .finally(() => {
+    renderLoading(false, popupNewPlace, newPlaceBtnValue, newPlaceBtnNewValue)
+    
+  })
 }
 
 //функция редактирования информации в профиле
 function handleProfileEditFormSubmit (data) {
-  renderLoading(true, popupEdit)
+  renderLoading(true, popupEdit, profileBtnValue, profileBtnNewValue)
   api.updateUserInfo(data)
   .then((dataUpdated => {
     recordUserInfo(dataUpdated)
+    profileEditForm.close()
   }))
   .catch((err) => {console.log(err)})
   .finally(() => {
-    renderLoading(false, popupEdit)
-    profileEditForm.closePopup()
+    renderLoading(false, popupEdit, profileBtnValue, profileBtnNewValue)
+    
   })
 }
-
-
-
-
-
 
 function pasteUserData(data) {
   popupEditNameInput.value = data.name 
@@ -159,38 +171,29 @@ function pasteUserData(data) {
 profileEditButton.addEventListener('click', () => {
   popupEditFormValidation.resetForm()
   pasteUserData(userInfo.getUserInfo())
-  profileEditForm.openPopup()
+  profileEditForm.open()
 });
 
 newCardAddButton.addEventListener('click', () => {
-  newPlaceForm.openPopup()
+  newPlaceForm.open()
   popupPlaceFormValidation.resetForm()
 });
 
-
-
 avatarEditElement.addEventListener('click', () => {
-  editAvatarForm.openPopup()
+  editAvatarForm.open()
   popupAvatarFormValidation.resetForm()
 })
 
 //функция обновления аватара через форму
 function handleEditAvatarFormSubmit(data) {
-  renderLoading(true, popupAvatarElement)
+  renderLoading(true, popupAvatarElement, profileBtnValue, profileBtnNewValue)
   api.editAvatar(data)
-  .then(res => avatarElement.src = res.avatar)
+  .then(res => {
+    avatarElement.src = res.avatar;
+    editAvatarForm.close()})
   .catch((err) => {console.log(err)})
   .finally(() => {
-    renderLoading(false, popupAvatarElement)
-    editAvatarForm.closePopup()
+    renderLoading(false, popupAvatarElement, profileBtnValue, profileBtnNewValue)
+    
   })
-}
-
-function renderLoading(isLoading, popupSelector) {
-  
-  if(isLoading) {
-    popupSelector.querySelector('.popup__save-button').value = "Сохранение..."
-  } else {
-    popupSelector.querySelector('.popup__save-button').value = "Сохранить"
-  }
 }

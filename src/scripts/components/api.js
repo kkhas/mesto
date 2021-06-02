@@ -12,7 +12,7 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    _request(endpoint, method, body) {
+    _createRequest(endpoint, method, body) {
         const fetchInit = {
             method: method,
             headers: {
@@ -29,35 +29,35 @@ export default class Api {
     }
 
     getUserInfo() {
-        return this._request('users/me', 'GET')
+        return this._createRequest('users/me', 'GET')
     }
 
     getInitialCards() {
-        return this._request('cards', 'GET')
+        return this._createRequest('cards', 'GET')
     }
     
     updateUserInfo(userInfo) {
-        return this._request('users/me', 'PATCH', userInfo)
+        return this._createRequest('users/me', 'PATCH', userInfo)
     }
     
     postCard(data) {
-        return this._request('cards', 'POST', data)
+        return this._createRequest('cards', 'POST', data)
     }
 
 
     deleteCard(id) {
-        return this._request(`cards/${id}`, 'DELETE')
+        return this._createRequest(`cards/${id}`, 'DELETE')
     }
 
     like(id) {
-        return this._request(`cards/likes/${id}`, 'PUT')
+        return this._createRequest(`cards/likes/${id}`, 'PUT')
     }
 
     deleteLike(id) {
-        return this._request(`cards/likes/${id}`, 'DELETE')
+        return this._createRequest(`cards/likes/${id}`, 'DELETE')
     }
 
     editAvatar(avatar) {
-        return this._request('users/me/avatar', 'PATCH', avatar)
+        return this._createRequest('users/me/avatar', 'PATCH', avatar)
     }
 }

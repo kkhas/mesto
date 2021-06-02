@@ -1,6 +1,7 @@
 export class Card {
 
-  constructor(cardData, user, handleCardClick, handleDeleteButtonClick, handleLikeAdd, handleLikeDelete) {
+  constructor(itemTemplate, cardData, user, handleCardClick, handleDeleteButtonClick, handleLikeAdd, handleLikeDelete) {
+    this._itemTemplate = itemTemplate;
     this._cardData = cardData;
     this._cardData.name = cardData.name;
     this._cardData.link = cardData.link;
@@ -8,14 +9,11 @@ export class Card {
     this._cardData._id = cardData._id;
     this._currentUser = user;
     this._cardElement = this._createCardElement();
-    
     this._addEventListeners();
     this._handleCardClick = handleCardClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
     this._handleLikeAdd = handleLikeAdd;
     this._handleLikeDelete = handleLikeDelete;
-    // console.log(this._currentUser)
-    // Array.from(this._cardData.likes).forEach(element => console.log(element));
   }
 
   getId() {
@@ -24,7 +22,7 @@ export class Card {
 
   _createCardElement() {
     this._owner = this._cardData.owner._id;
-    const cardElement = document.querySelector(".item_template").content.children[0].cloneNode(true);
+    const cardElement = this._itemTemplate.content.children[0].cloneNode(true);
     const image = cardElement.querySelector('.photo-grid__image');
     const title = cardElement.querySelector('.photo-grid__title');
     const likes = cardElement.querySelector('.photo-grid__like-count');
@@ -45,10 +43,6 @@ export class Card {
     }
     
     return cardElement;
-  }
-  
-  _isLiked() {
-    
   }
 
   _addEventListeners() {

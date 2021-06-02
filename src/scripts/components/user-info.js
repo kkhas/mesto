@@ -1,7 +1,8 @@
 export default class UserInfo {
-    constructor(profileTitleSelector, profileSubtitleSelector) {
-        this._profileTitle = document.querySelector(profileTitleSelector);
-        this._profileSubtitle = document.querySelector(profileSubtitleSelector);
+    constructor(profileTitleSelector, profileSubtitleSelector, profileAvatarSelector) {
+        this._profileTitle = profileTitleSelector;
+        this._profileSubtitle = profileSubtitleSelector;
+        this._profileAvatar = profileAvatarSelector;
     }
 
     getUserId() {
@@ -11,14 +12,22 @@ export default class UserInfo {
     getUserInfo() {
         const values = {
             name: this._name = this._profileTitle.textContent,
-            job: this._job = this._profileSubtitle.textContent
+            job: this._job = this._profileSubtitle.textContent,
+            avatar: this._avatar = this._profileAvatar.src
         }
         
         return values
     }
     
     setUserInfo(data) {
-        this._profileTitle.textContent = data.name ;
-        this._profileSubtitle.textContent = data.about;
+        if(data.name) {
+            this._profileTitle.textContent = data.name
+        }
+        if(data.about) {
+            this._profileSubtitle.textContent = data.about
+        }
+        if(data.avatar) {
+            this._profileAvatar.src = data.avatar
+        }
     }
 }

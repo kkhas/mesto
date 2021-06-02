@@ -8,8 +8,18 @@ const profileAbout = document.querySelector('.profile__subtitle')
 const avatarElement = document.querySelector('.profile__avatar')
 const avatarEditElement = document.querySelector('.profile__avatar-container')
 const popupEdit = document.querySelector('.popup_type_edit')
-const popupConfirm = document.querySelector('.popup_type_confirm')
 const popupAvatarElement = document.querySelector('.popup_type_edit-avatar')
+const popupConfirm = document.querySelector('.popup_type_confirm')
+const popupNewPlace = document.querySelector(".popup_type_new-place")
+const popupImageSelector = document.querySelector('.popup_type_image')
+const popupProfileEditForm = document.querySelector('.popup__form_edit')
+const avatarEditForm = document.querySelector('.popup__form_edit-avatar')
+const popupNewPlaceForm = document.querySelector('.popup__form_new-place')
+const profileBtnValue = "Сохранить"
+const profileBtnNewValue = "Сохранение..."
+const newPlaceBtnValue = "Создать"
+const newPlaceBtnNewValue = "Создание..." 
+const itemTemplate = document.querySelector(".item_template")
 
 export { 
     avatarEditElement, 
@@ -21,6 +31,16 @@ export {
     profileName, 
     profileAbout, 
     avatarElement,
-    popupConfirm,
     popupEdit,
-    popupAvatarElement }
+    popupAvatarElement,
+    popupConfirm,
+    popupNewPlace,
+    popupImageSelector,
+    popupProfileEditForm,
+    avatarEditForm,
+    popupNewPlaceForm,
+    profileBtnValue,
+    profileBtnNewValue,
+    newPlaceBtnValue,
+    newPlaceBtnNewValue,
+    itemTemplate}

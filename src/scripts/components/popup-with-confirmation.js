@@ -17,7 +17,7 @@ export default class PopupWithConfirmation extends Popup {
         e.preventDefault()  
         
         this._confirmSubmitHandler(this._evt, this._data);
-        this.closePopup();
+        this.close();
       })
     }
   }
